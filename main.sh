@@ -108,7 +108,8 @@ fetchToolsAPI() {
                 else
                     $tool + "Url=" + .browser_download_url,
                     $tool + "Size=" + (.size | tostring)
-                end)' >>".${source}-data"        i=$(("$i" + 1))
+                end)' >>".${source}-data"
+        i=$(("$i" + 1))
     done
 
     if [ "$(wc -l <".${source}-data")" -lt "11" ]; then
