@@ -115,6 +115,7 @@ fetchToolsAPI() {
                 end)' >>".${source}-data"
         i=$(("$i" + 1))
     done
+    echo .${source}-data
 
     if [ "$(wc -l <".${source}-data")" -lt "11" ]; then
         "${header[@]}" --msgbox "Oops! Unable to connect to Github.\n\nRetry or change your Network." 12 45
