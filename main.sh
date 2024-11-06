@@ -85,6 +85,10 @@ fetchToolsAPI() {
     : >".${source}-data"
     [ "$FetchPreReleasedTools" == false ] && stableRelease="/latest" || stableRelease=""
     i=0 && for tool in "${tools[@]}"; do
+        if [[ "$source" == "revanced" && "${links[$i]}" == *"revanced-integrations" ]]; then
+            continue
+        fi
+
         if [[ "${links[$i]}" == *"revanced-cli" ]]; then
             releaseUrl="https://api.github.com/repos/${links[$i]}/releases/latest"
         else
