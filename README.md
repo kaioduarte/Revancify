@@ -39,7 +39,7 @@
 2. Open Termux.
 3. Copy and paste this command.
 ```
-curl -sL https://raw.githubusercontent.com/decipher3114/Revancify/refs/heads/bump/v2.0/install.sh | bash
+curl -sL https://raw.githubusercontent.com/kaioduarte/Revancify/refs/heads/bump/v2.0/install.sh | bash
 ```
 
 ## Usage
