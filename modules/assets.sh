@@ -33,14 +33,15 @@ fetchAssetsInfo() {
             ' "$SRC/sources.json"
         )
 
-        if [ "${#SOURCE_INFO[@]}" -gt 2 ]; then
-            VERSION=$("${CURL[@]}" "${SOURCE_INFO[2]}" | jq -r '.version')
-            eval "PATCHES_API_URL=\"${SOURCE_INFO[0]}\""
-        else
-            PATCHES_API_URL="${SOURCE_INFO[0]}"
-        fi
+        PATCHES_API_DATA=$("${CURL[@]}" "https://api.github.com/repos/ReVanced/revanced-patches/releases" | jq -r '.[0]')
 
-        JSON_URL="${SOURCE_INFO[1]}"
+        if [ -n "$PATCHES_API_DATA" ]; then
+            PATCHES_VERSION=$(echo "$PATCHES_API_DATA" | jq -r '.tag_name')
+            PATCHES_API_URL=$(echo "$PATCHES_API_DATA" | jq -r '.url')
+        else
+            notify msg "Unable to fetch latest patches release. Check your network or API availability."
+            return 1
+        fi
 
         source <("${CURL[@]}" "$PATCHES_API_URL" | jq -r '
                 if type == "array" then .[0] else . end |
